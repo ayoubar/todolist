@@ -42,3 +42,13 @@ function ajouterTache(e) {
     alert('faut remplir le form');
   }
 }
+
+// selectinner clear tasks button
+const clearBtn = document.querySelector('.clear-tasks');
+
+// ajouter click
+clearBtn.addEventListener('click', viderListUl);
+
+function viderListUl() {
+  list.innerHTML = '';
+}
