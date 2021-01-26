@@ -1,3 +1,8 @@
 # to-do-list
-# to-do-list
-# todolist
+
+### Fonctionnalités
+
+- ajouter une tache
+- vider la liste des taches
+- chercher des taches
+- supression d'une tache
