@@ -30,7 +30,7 @@ function ajouterTache(e) {
 
     // recuperez la valuer de la clé tasks qui existe deja dans localStorage
     const tasks = JSON.parse(localStorage.getItem('tasks')); // ["hello", "morocco"]
-
+    // vous avez trouvé la solution
     // ajouter la valuer de l'input dans le tableau tasks
     tasks.push(inputText.value); // ['hello', 'morocco', "2020"]
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -92,6 +92,7 @@ const clearBtn = document.querySelector('.clear-tasks');
 clearBtn.addEventListener('click', viderListUl);
 
 function viderListUl() {
+  localStorage.removeItem('tasks');
   list.innerHTML = '';
 }
 
@@ -109,3 +110,45 @@ console.log(tableauFromStorage);
   1 . creer la clé tasks , sa valuer est un tableau vide (dans le scope global)
   2 . 
 */
+
+function LoadTasksFromLocalStorage() {
+  let tasks = localStorage.getItem('tasks');
+  if (tasks !== null) {
+    // verifier si la clé task est existe
+    tasks = JSON.parse(localStorage.getItem('tasks')); // ["ayoub","mehdi","salman","test"]
+    for (let t of tasks) {
+      const element = document.createElement('li');
+
+      // ajouter class `collection-item`
+      element.classList.add('collection-item');
+
+      // ajouter le lien a dans li (method 1)
+      element.innerHTML = `
+        <a class="delete-item secondary-content">
+          <i class="fa fa-remove"></i>
+        </a>
+    `;
+      // creer le text (contenu) pour li (mehtod1)
+      const text = document.createTextNode(t);
+      element.appendChild(text);
+
+      list.appendChild(element);
+    }
+    //   const element = document.createElement('li');
+
+    //   // ajouter class `collection-item`
+    //   element.classList.add('collection-item');
+
+    //   // ajouter le lien a dans li (method 1)
+    //   element.innerHTML = `
+    //     <a class="delete-item secondary-content">
+    //       <i class="fa fa-remove"></i>
+    //     </a>
+    // `;
+    //  // creer le text (contenu) pour li (mehtod1)
+    //  const text = document.createTextNode(inputText.value);
+    //  element.appendChild(text);
+  }
+}
+
+LoadTasksFromLocalStorage();
