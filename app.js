@@ -152,3 +152,57 @@ function LoadTasksFromLocalStorage() {
 }
 
 LoadTasksFromLocalStorage();
+
+// EVENT BUBBLING
+
+document.querySelector('.card-title').addEventListener('click', function () {
+  console.log('card title');
+});
+
+document.querySelector('.card-content').addEventListener('click', function () {
+  console.log('card content');
+});
+
+// event Delegation
+const main = document.getElementById('main');
+
+main.addEventListener('click', function (e) {
+  if (e.target.className === 'card-title') {
+    alert('card title');
+  } else if (e.target.className === 'card-content') {
+    alert('card Content');
+  }
+});
+
+// supprimer les elements
+list.addEventListener('click', supprimerLi);
+
+function supprimerLi(e) {
+  // debugger;
+  let indice = undefined;
+  if (e.target.className === 'fa fa-remove') {
+    console.log(e.target.parentElement.parentElement);
+    // suppression au niveau de LocalStorage
+    // ? recuperze le tableaud deouis localStorage
+    const tasks = JSON.parse(localStorage.getItem('tasks'));
+
+    // aficher le contenu de li
+    console.log(e.target.parentElement.parentElement.textContent);
+    for (let t in tasks) {
+      if (
+        e.target.parentElement.parentElement.textContent.trim() === tasks[t]
+      ) {
+        indice = t; // recuperez l'incide d'elment supprimé
+        // supprimer l'element depuis la tableau tasks
+        tasks.splice(indice, 1);
+        console.log(tasks);
+
+        // reinitalizer la clé tasks dans localStorage
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        // suppression UI
+        e.target.parentElement.parentElement.remove();
+      }
+    }
+  }
+}
